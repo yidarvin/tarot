@@ -3,6 +3,7 @@ import random
 from typing import List
 
 from dotenv import load_dotenv
+from interpreter import TarotInterpreter
 
 
 DEFAULT_REVERSAL_PROBABILITY = 0.5
@@ -132,6 +133,24 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Tarot spread CLI")
     parser.add_argument("spread", choices=["3card", "celticcross"], help="Which spread to draw")
     parser.add_argument(
+        "--interpret",
+        dest="interpret",
+        action="store_true",
+        default=True,
+        help="Generate interpretations with OpenAI for each card as it is revealed (default: on)",
+    )
+    parser.add_argument(
+        "--no-interpret",
+        dest="interpret",
+        action="store_false",
+        help="Disable interpretations",
+    )
+    parser.add_argument(
+        "--model",
+        default="gpt-5",
+        help="OpenAI model to use for interpretations (default: gpt-5)",
+    )
+    parser.add_argument(
         "--reversed",
         dest="reversed",
         action="store_true",
@@ -176,8 +195,35 @@ def main() -> None:
             reversal_probability=reversal_probability,
         )
         print("Three-card spread:")
-        for idx, card in enumerate(cards, start=1):
-            print(f"{idx}. {card}")
+        if args.interpret:
+            interpreter = TarotInterpreter("3card", model=args.model)
+            prior: List[dict] = []
+            for idx, card in enumerate(cards, start=1):
+                interpretation = interpreter.interpret_card(
+                    card=card,
+                    position_index=idx,
+                    prior_interpretations=prior,
+                )
+                print(f"{idx}. {card}")
+                print(f"   → {interpretation}")
+                orientation = "reversed" if card.endswith("(Reversed)") else "upright"
+                position_label = interpreter.positions.get(idx).label if interpreter.positions.get(idx) else f"Card {idx}"
+                prior.append(
+                    {
+                        "position_index": idx,
+                        "position_label": position_label,
+                        "card": card,
+                        "orientation": orientation,
+                        "interpretation": interpretation,
+                    }
+                )
+            # Final summary
+            summary = interpreter.summarize_spread(prior)
+            print("\nSummary:")
+            print(summary)
+        else:
+            for idx, card in enumerate(cards, start=1):
+                print(f"{idx}. {card}")
         return
     if args.spread == "celticcross":
         cards = draw_celtic_cross_spread(
@@ -186,8 +232,35 @@ def main() -> None:
             reversal_probability=reversal_probability,
         )
         print("Celtic Cross spread:")
-        for idx, card in enumerate(cards, start=1):
-            print(f"{idx}. {card}")
+        if args.interpret:
+            interpreter = TarotInterpreter("celticcross", model=args.model)
+            prior: List[dict] = []
+            for idx, card in enumerate(cards, start=1):
+                interpretation = interpreter.interpret_card(
+                    card=card,
+                    position_index=idx,
+                    prior_interpretations=prior,
+                )
+                print(f"{idx}. {card}")
+                print(f"   → {interpretation}")
+                orientation = "reversed" if card.endswith("(Reversed)") else "upright"
+                position_label = interpreter.positions.get(idx).label if interpreter.positions.get(idx) else f"Card {idx}"
+                prior.append(
+                    {
+                        "position_index": idx,
+                        "position_label": position_label,
+                        "card": card,
+                        "orientation": orientation,
+                        "interpretation": interpretation,
+                    }
+                )
+            # Final summary
+            summary = interpreter.summarize_spread(prior)
+            print("\nSummary:")
+            print(summary)
+        else:
+            for idx, card in enumerate(cards, start=1):
+                print(f"{idx}. {card}")
         return
 
     raise SystemExit("Unsupported spread type")
