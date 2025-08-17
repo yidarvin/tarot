@@ -1,0 +1,397 @@
+{
+  "selected_count": 78,
+  "expected_count": 78,
+  "missing": [],
+  "mapping": [
+    {
+      "key": "Cups01",
+      "source": "Cups01.jpg",
+      "output": "Cups01.jpg"
+    },
+    {
+      "key": "Cups02",
+      "source": "Cups02.jpg",
+      "output": "Cups02.jpg"
+    },
+    {
+      "key": "Cups03",
+      "source": "Cups03.jpg",
+      "output": "Cups03.jpg"
+    },
+    {
+      "key": "Cups04",
+      "source": "Cups04.jpg",
+      "output": "Cups04.jpg"
+    },
+    {
+      "key": "Cups05",
+      "source": "Cups05.jpg",
+      "output": "Cups05.jpg"
+    },
+    {
+      "key": "Cups06",
+      "source": "Cups06.jpg",
+      "output": "Cups06.jpg"
+    },
+    {
+      "key": "Cups07",
+      "source": "Cups07.jpg",
+      "output": "Cups07.jpg"
+    },
+    {
+      "key": "Cups08",
+      "source": "Cups08.jpg",
+      "output": "Cups08.jpg"
+    },
+    {
+      "key": "Cups09",
+      "source": "Cups09.jpg",
+      "output": "Cups09.jpg"
+    },
+    {
+      "key": "Cups10",
+      "source": "Cups10.jpg",
+      "output": "Cups10.jpg"
+    },
+    {
+      "key": "Cups11",
+      "source": "Cups11.jpg",
+      "output": "Cups11.jpg"
+    },
+    {
+      "key": "Cups12",
+      "source": "Cups12.jpg",
+      "output": "Cups12.jpg"
+    },
+    {
+      "key": "Cups13",
+      "source": "Cups13.jpg",
+      "output": "Cups13.jpg"
+    },
+    {
+      "key": "Cups14",
+      "source": "Cups14.jpg",
+      "output": "Cups14.jpg"
+    },
+    {
+      "key": "Pents01",
+      "source": "Pents01.jpg",
+      "output": "Pents01.jpg"
+    },
+    {
+      "key": "Pents02",
+      "source": "Pents02.jpg",
+      "output": "Pents02.jpg"
+    },
+    {
+      "key": "Pents03",
+      "source": "Pents03.jpg",
+      "output": "Pents03.jpg"
+    },
+    {
+      "key": "Pents04",
+      "source": "Pents04.jpg",
+      "output": "Pents04.jpg"
+    },
+    {
+      "key": "Pents05",
+      "source": "Pents05.jpg",
+      "output": "Pents05.jpg"
+    },
+    {
+      "key": "Pents06",
+      "source": "Pents06.jpg",
+      "output": "Pents06.jpg"
+    },
+    {
+      "key": "Pents07",
+      "source": "Pents07.jpg",
+      "output": "Pents07.jpg"
+    },
+    {
+      "key": "Pents08",
+      "source": "Pents08.jpg",
+      "output": "Pents08.jpg"
+    },
+    {
+      "key": "Pents09",
+      "source": "Pents09.jpg",
+      "output": "Pents09.jpg"
+    },
+    {
+      "key": "Pents10",
+      "source": "Pents10.jpg",
+      "output": "Pents10.jpg"
+    },
+    {
+      "key": "Pents11",
+      "source": "Pents11.jpg",
+      "output": "Pents11.jpg"
+    },
+    {
+      "key": "Pents12",
+      "source": "Pents12.jpg",
+      "output": "Pents12.jpg"
+    },
+    {
+      "key": "Pents13",
+      "source": "Pents13.jpg",
+      "output": "Pents13.jpg"
+    },
+    {
+      "key": "Pents14",
+      "source": "Pents14.jpg",
+      "output": "Pents14.jpg"
+    },
+    {
+      "key": "RWS_Tarot_00_",
+      "source": "RWS_Tarot_00_Fool.jpg",
+      "output": "RWS_Tarot_00_Fool.jpg"
+    },
+    {
+      "key": "RWS_Tarot_01_",
+      "source": "RWS_Tarot_01_Magician.jpg",
+      "output": "RWS_Tarot_01_Magician.jpg"
+    },
+    {
+      "key": "RWS_Tarot_02_",
+      "source": "RWS_Tarot_02_High_Priestess.jpg",
+      "output": "RWS_Tarot_02_High_Priestess.jpg"
+    },
+    {
+      "key": "RWS_Tarot_03_",
+      "source": "RWS_Tarot_03_Empress.jpg",
+      "output": "RWS_Tarot_03_Empress.jpg"
+    },
+    {
+      "key": "RWS_Tarot_04_",
+      "source": "RWS_Tarot_04_Emperor.jpg",
+      "output": "RWS_Tarot_04_Emperor.jpg"
+    },
+    {
+      "key": "RWS_Tarot_05_",
+      "source": "RWS_Tarot_05_Hierophant.jpg",
+      "output": "RWS_Tarot_05_Hierophant.jpg"
+    },
+    {
+      "key": "RWS_Tarot_06_",
+      "source": "RWS_Tarot_06_Lovers.jpg",
+      "output": "RWS_Tarot_06_Lovers.jpg"
+    },
+    {
+      "key": "RWS_Tarot_07_",
+      "source": "RWS_Tarot_07_Chariot.jpg",
+      "output": "RWS_Tarot_07_Chariot.jpg"
+    },
+    {
+      "key": "RWS_Tarot_08_",
+      "source": "RWS_Tarot_08_Strength.jpg",
+      "output": "RWS_Tarot_08_Strength.jpg"
+    },
+    {
+      "key": "RWS_Tarot_09_",
+      "source": "RWS_Tarot_09_Hermit.jpg",
+      "output": "RWS_Tarot_09_Hermit.jpg"
+    },
+    {
+      "key": "RWS_Tarot_10_",
+      "source": "RWS_Tarot_10_Wheel_of_Fortune.jpg",
+      "output": "RWS_Tarot_10_Wheel_of_Fortune.jpg"
+    },
+    {
+      "key": "RWS_Tarot_11_",
+      "source": "RWS_Tarot_11_Justice.jpg",
+      "output": "RWS_Tarot_11_Justice.jpg"
+    },
+    {
+      "key": "RWS_Tarot_12_",
+      "source": "RWS_Tarot_12_Hanged_Man.jpg",
+      "output": "RWS_Tarot_12_Hanged_Man.jpg"
+    },
+    {
+      "key": "RWS_Tarot_13_",
+      "source": "RWS_Tarot_13_Death.jpg",
+      "output": "RWS_Tarot_13_Death.jpg"
+    },
+    {
+      "key": "RWS_Tarot_14_",
+      "source": "RWS_Tarot_14_Temperance.jpg",
+      "output": "RWS_Tarot_14_Temperance.jpg"
+    },
+    {
+      "key": "RWS_Tarot_15_",
+      "source": "RWS_Tarot_15_Devil.jpg",
+      "output": "RWS_Tarot_15_Devil.jpg"
+    },
+    {
+      "key": "RWS_Tarot_16_",
+      "source": "RWS_Tarot_16_Tower.jpg",
+      "output": "RWS_Tarot_16_Tower.jpg"
+    },
+    {
+      "key": "RWS_Tarot_17_",
+      "source": "RWS_Tarot_17_Star.jpg",
+      "output": "RWS_Tarot_17_Star.jpg"
+    },
+    {
+      "key": "RWS_Tarot_18_",
+      "source": "RWS_Tarot_18_Moon.jpg",
+      "output": "RWS_Tarot_18_Moon.jpg"
+    },
+    {
+      "key": "RWS_Tarot_19_",
+      "source": "RWS_Tarot_19_Sun.jpg",
+      "output": "RWS_Tarot_19_Sun.jpg"
+    },
+    {
+      "key": "RWS_Tarot_20_",
+      "source": "RWS_Tarot_20_Judgement.jpg",
+      "output": "RWS_Tarot_20_Judgement.jpg"
+    },
+    {
+      "key": "RWS_Tarot_21_",
+      "source": "RWS_Tarot_21_World.jpg",
+      "output": "RWS_Tarot_21_World.jpg"
+    },
+    {
+      "key": "Swords01",
+      "source": "Swords01.jpg",
+      "output": "Swords01.jpg"
+    },
+    {
+      "key": "Swords02",
+      "source": "Swords02.jpg",
+      "output": "Swords02.jpg"
+    },
+    {
+      "key": "Swords03",
+      "source": "Swords03.jpg",
+      "output": "Swords03.jpg"
+    },
+    {
+      "key": "Swords04",
+      "source": "Swords04.jpg",
+      "output": "Swords04.jpg"
+    },
+    {
+      "key": "Swords05",
+      "source": "Swords05.jpg",
+      "output": "Swords05.jpg"
+    },
+    {
+      "key": "Swords06",
+      "source": "Swords06.jpg",
+      "output": "Swords06.jpg"
+    },
+    {
+      "key": "Swords07",
+      "source": "Swords07.jpg",
+      "output": "Swords07.jpg"
+    },
+    {
+      "key": "Swords08",
+      "source": "Swords08.jpg",
+      "output": "Swords08.jpg"
+    },
+    {
+      "key": "Swords09",
+      "source": "Swords09.jpg",
+      "output": "Swords09.jpg"
+    },
+    {
+      "key": "Swords10",
+      "source": "Swords10.jpg",
+      "output": "Swords10.jpg"
+    },
+    {
+      "key": "Swords11",
+      "source": "Swords11.jpg",
+      "output": "Swords11.jpg"
+    },
+    {
+      "key": "Swords12",
+      "source": "Swords12.jpg",
+      "output": "Swords12.jpg"
+    },
+    {
+      "key": "Swords13",
+      "source": "Swords13.jpg",
+      "output": "Swords13.jpg"
+    },
+    {
+      "key": "Swords14",
+      "source": "Swords14.jpg",
+      "output": "Swords14.jpg"
+    },
+    {
+      "key": "Wands01",
+      "source": "Wands01.jpg",
+      "output": "Wands01.jpg"
+    },
+    {
+      "key": "Wands02",
+      "source": "Wands02.jpg",
+      "output": "Wands02.jpg"
+    },
+    {
+      "key": "Wands03",
+      "source": "Wands03.jpg",
+      "output": "Wands03.jpg"
+    },
+    {
+      "key": "Wands04",
+      "source": "Wands04.jpg",
+      "output": "Wands04.jpg"
+    },
+    {
+      "key": "Wands05",
+      "source": "Wands05.jpg",
+      "output": "Wands05.jpg"
+    },
+    {
+      "key": "Wands06",
+      "source": "Wands06.jpg",
+      "output": "Wands06.jpg"
+    },
+    {
+      "key": "Wands07",
+      "source": "Wands07.jpg",
+      "output": "Wands07.jpg"
+    },
+    {
+      "key": "Wands08",
+      "source": "Wands08.jpg",
+      "output": "Wands08.jpg"
+    },
+    {
+      "key": "Wands09",
+      "source": "Tarot_Nine_of_Wands.jpg",
+      "output": "Wands09.jpg"
+    },
+    {
+      "key": "Wands10",
+      "source": "Wands10.jpg",
+      "output": "Wands10.jpg"
+    },
+    {
+      "key": "Wands11",
+      "source": "Wands11.jpg",
+      "output": "Wands11.jpg"
+    },
+    {
+      "key": "Wands12",
+      "source": "Wands12.jpg",
+      "output": "Wands12.jpg"
+    },
+    {
+      "key": "Wands13",
+      "source": "Wands13.jpg",
+      "output": "Wands13.jpg"
+    },
+    {
+      "key": "Wands14",
+      "source": "Wands14.jpg",
+      "output": "Wands14.jpg"
+    }
+  ]
+}
