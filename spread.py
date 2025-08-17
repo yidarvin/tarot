@@ -93,11 +93,44 @@ def draw_cards(
     return with_orientations
 
 
+def draw_three_card_spread(
+    deck: List[str],
+    *,
+    allow_reversed: bool,
+    reversal_probability: float,
+) -> List[str]:
+    """Draw a classic three-card spread.
+
+    Returns the three cards in order 1..3.
+    """
+    return draw_cards(
+        deck,
+        3,
+        allow_reversed=allow_reversed,
+        reversal_probability=reversal_probability,
+    )
+
+
+def draw_celtic_cross_spread(
+    deck: List[str],
+    *,
+    allow_reversed: bool,
+    reversal_probability: float,
+) -> List[str]:
+    """Draw a Celtic Cross spread (10 cards)."""
+    return draw_cards(
+        deck,
+        10,
+        allow_reversed=allow_reversed,
+        reversal_probability=reversal_probability,
+    )
+
+
 def main() -> None:
     load_dotenv()  # prepares for future OpenAI usage
 
     parser = argparse.ArgumentParser(description="Tarot spread CLI")
-    parser.add_argument("spread", choices=["3card"], help="Which spread to draw")
+    parser.add_argument("spread", choices=["3card", "celticcross"], help="Which spread to draw")
     parser.add_argument(
         "--reversed",
         dest="reversed",
@@ -129,21 +162,30 @@ def main() -> None:
 
     deck = create_standard_tarot_deck()
 
-    if args.spread == "3card":
-        allow_reversed = args.reversed
-        reversal_probability = (
-            DEFAULT_REVERSAL_PROBABILITY if args.reversal_prob is None else args.reversal_prob
-        )
-        if args.reversal_prob is not None and not (0.0 <= args.reversal_prob <= 1.0):
-            raise SystemExit("--reversal-prob must be between 0 and 1")
+    allow_reversed = args.reversed
+    reversal_probability = (
+        DEFAULT_REVERSAL_PROBABILITY if args.reversal_prob is None else args.reversal_prob
+    )
+    if args.reversal_prob is not None and not (0.0 <= args.reversal_prob <= 1.0):
+        raise SystemExit("--reversal-prob must be between 0 and 1")
 
-        cards = draw_cards(
+    if args.spread == "3card":
+        cards = draw_three_card_spread(
             deck,
-            3,
             allow_reversed=allow_reversed,
             reversal_probability=reversal_probability,
         )
         print("Three-card spread:")
+        for idx, card in enumerate(cards, start=1):
+            print(f"{idx}. {card}")
+        return
+    if args.spread == "celticcross":
+        cards = draw_celtic_cross_spread(
+            deck,
+            allow_reversed=allow_reversed,
+            reversal_probability=reversal_probability,
+        )
+        print("Celtic Cross spread:")
         for idx, card in enumerate(cards, start=1):
             print(f"{idx}. {card}")
         return
