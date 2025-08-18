@@ -3,7 +3,8 @@ import random
 from typing import List
 
 from dotenv import load_dotenv
-from interpreter import TarotInterpreter
+from interpreter import TarotInterpreter, parse_spread_markdown
+from saver import save_read_markdown
 
 
 DEFAULT_REVERSAL_PROBABILITY = 0.5
@@ -221,9 +222,30 @@ def main() -> None:
             summary = interpreter.summarize_spread(prior)
             print("\nSummary:")
             print(summary)
+            saved_path = save_read_markdown(spread_key="3card", prior=prior, summary_text=summary)
+            if saved_path:
+                print(f"\nSaved markdown: {saved_path}")
         else:
             for idx, card in enumerate(cards, start=1):
                 print(f"{idx}. {card}")
+            # Build minimal prior and save even without interpretations
+            positions = parse_spread_markdown().get("3card", {})
+            prior = []
+            for idx, card in enumerate(cards, start=1):
+                orientation = "reversed" if card.endswith("(Reversed)") else "upright"
+                position_label = positions.get(idx).label if positions.get(idx) else f"Card {idx}"
+                prior.append(
+                    {
+                        "position_index": idx,
+                        "position_label": position_label,
+                        "card": card,
+                        "orientation": orientation,
+                        "interpretation": "",
+                    }
+                )
+            saved_path = save_read_markdown(spread_key="3card", prior=prior, summary_text=None)
+            if saved_path:
+                print(f"\nSaved markdown: {saved_path}")
         return
     if args.spread == "celticcross":
         cards = draw_celtic_cross_spread(
@@ -258,9 +280,30 @@ def main() -> None:
             summary = interpreter.summarize_spread(prior)
             print("\nSummary:")
             print(summary)
+            saved_path = save_read_markdown(spread_key="celticcross", prior=prior, summary_text=summary)
+            if saved_path:
+                print(f"\nSaved markdown: {saved_path}")
         else:
             for idx, card in enumerate(cards, start=1):
                 print(f"{idx}. {card}")
+            # Build minimal prior and save even without interpretations
+            positions = parse_spread_markdown().get("celticcross", {})
+            prior = []
+            for idx, card in enumerate(cards, start=1):
+                orientation = "reversed" if card.endswith("(Reversed)") else "upright"
+                position_label = positions.get(idx).label if positions.get(idx) else f"Card {idx}"
+                prior.append(
+                    {
+                        "position_index": idx,
+                        "position_label": position_label,
+                        "card": card,
+                        "orientation": orientation,
+                        "interpretation": "",
+                    }
+                )
+            saved_path = save_read_markdown(spread_key="celticcross", prior=prior, summary_text=None)
+            if saved_path:
+                print(f"\nSaved markdown: {saved_path}")
         return
 
     raise SystemExit("Unsupported spread type")

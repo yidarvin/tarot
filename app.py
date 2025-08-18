@@ -10,6 +10,7 @@ from spread import (
     DEFAULT_REVERSAL_PROBABILITY,
 )
 from interpreter import TarotInterpreter, parse_spread_markdown, parse_tarot_markdown
+from saver import save_read_markdown
 from dotenv import load_dotenv
 
 
@@ -241,7 +242,7 @@ def build_spread_payload(
         for item in prior
     ]
 
-    return {
+    result = {
         "spread_key": spread_key,
         "board": {
             "width": board_width,
@@ -252,6 +253,20 @@ def build_spread_payload(
         "cards": placements,
         "panel": right_panel,
     }
+
+    # Save markdown reading for Obsidian, using the same prior data and optional summary
+    summary_text = None
+    if interpreter is not None:
+        try:
+            summary_text = interpreter.summarize_spread(prior)
+        except Exception:
+            summary_text = None
+    try:
+        save_read_markdown(spread_key=spread_key, prior=prior, summary_text=summary_text)
+    except Exception:
+        pass
+
+    return result
 
 
 @app.get("/")
