@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tarot Spread</title>
+    <style>
+      :root {
+        --bg: #0f1020;
+        --panel-bg: #14162b;
+        --text: #f3f4f6;
+        --muted: #9aa3b2;
+        --accent: #7c5cff;
+        --card-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        background: radial-gradient(1200px 600px at 30% -10%, #1b1e39 0%, var(--bg) 60%);
+        color: var(--text);
+      }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 24px;
+        border-bottom: 1px solid #232649;
+      }
+      header h1 { font-size: 18px; margin: 0; }
+      header .controls { display: flex; gap: 8px; }
+      header a, header button {
+        background: #22254a;
+        color: var(--text);
+        text-decoration: none;
+        border: 1px solid #2f3364;
+        padding: 8px 12px;
+        border-radius: 8px;
+        font-size: 13px;
+      }
+      main {
+        display: grid;
+        grid-template-columns: 1fr minmax(320px, 460px);
+        gap: 0;
+        height: calc(100vh - 64px);
+      }
+      .board-wrapper {
+        overflow: auto;
+        position: relative;
+        padding: 24px;
+      }
+      .board {
+        position: relative;
+        margin: 0 auto;
+        background: repeating-radial-gradient(circle at center, rgba(255,255,255,0.02), rgba(255,255,255,0.02) 2px, transparent 2px, transparent 6px);
+        border: 1px solid #2a2d59;
+        border-radius: 16px;
+      }
+      .card {
+        position: absolute;
+        width: var(--card-w);
+        height: var(--card-h);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: var(--card-shadow);
+        transform-origin: center center;
+        background: #0a0b18;
+        border: 1px solid #2f3364;
+      }
+      .card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+      .card .fallback {
+        display: flex; align-items: center; justify-content: center; height: 100%; padding: 12px; text-align: center; color: var(--muted); font-size: 12px;
+      }
+      .card .badge {
+        position: absolute; top: 6px; left: 6px; background: rgba(12, 14, 30, 0.8); color: var(--text); border: 1px solid #2f3364; padding: 4px 6px; border-radius: 8px; font-size: 11px;
+      }
+      .card .label {
+        position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(180deg, transparent, rgba(10,11,24,0.9)); padding: 8px 10px; font-size: 12px;
+      }
+      .panel {
+        border-left: 1px solid #232649;
+        background: var(--panel-bg);
+        height: calc(100vh - 64px);
+        overflow: auto;
+        padding: 16px 16px 24px 16px;
+      }
+      .panel h2 { font-size: 16px; margin: 0 0 12px; }
+      .entry { padding: 12px; border: 1px solid #2f3364; border-radius: 10px; margin-bottom: 10px; background: #171938; }
+      .entry h3 { margin: 0 0 6px; font-size: 14px; }
+      .entry .meta { color: var(--muted); font-size: 12px; margin-bottom: 6px; }
+      .entry .interp { font-size: 13px; line-height: 1.35; }
+      .hint { color: var(--muted); font-size: 13px; padding: 16px; }
+      .legend { color: var(--muted); font-size: 12px; margin-left: 8px; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Tarot Spread <span class="legend">(draw and view on canvas; details on the right)</span></h1>
+      <div class="controls">
+        <a href="/spread/3card">Draw 3-Card</a>
+        <a href="/spread/celticcross">Draw Celtic Cross</a>
+        <a href="/">Clear</a>
+      </div>
+    </header>
+    <main>
+      <div class="board-wrapper">
+        {% if payload %}
+          <div class="board" style="width: {{ payload.board.width }}px; height: {{ payload.board.height }}px; --card-w: {{ payload.board.card_width }}px; --card-h: {{ payload.board.card_height }}px;">
+            {% for c in payload.cards %}
+              <div class="card" style="left: {{ c.left }}px; top: {{ c.top }}px; {% if c.orientation == 'reversed' %}transform: rotate(180deg);{% endif %}">
+                <div class="badge">{{ c.index }}</div>
+                {% if c.image_url %}
+                  <img src="{{ c.image_url }}" alt="{{ c.title }}" />
+                {% else %}
+                  <div class="fallback">{{ c.title }}</div>
+                {% endif %}
+                <div class="label">{{ c.title }}</div>
+              </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <div class="hint">
+            Choose a spread to draw cards. Images are served from <code>cards/standard</code> and positioned by coordinates from <code>spread.MD</code>.
+          </div>
+        {% endif %}
+      </div>
+      <aside class="panel">
+        <h2>Cards & Interpretations</h2>
+        {% if payload %}
+          {% for p in payload.panel %}
+            <div class="entry">
+              <h3>{{ p.index }}. {{ p.card }}</h3>
+              <div class="meta">Position: {{ p.position_label }} — {{ p.represents }}</div>
+              {% if p.interpretation %}
+                <div class="interp">{{ p.interpretation }}</div>
+              {% else %}
+                <div class="interp" style="color: var(--muted)">No interpretation generated.</div>
+              {% endif %}
+            </div>
+          {% endfor %}
+        {% else %}
+          <div class="hint">No draw yet.</div>
+        {% endif %}
+      </aside>
+    </main>
+  </body>
+</html>
+
+
