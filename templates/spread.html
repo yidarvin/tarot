@@ -118,6 +118,8 @@
               </div>
             {% endfor %}
           </div>
+        {% elif stream_url %}
+          <div id="board" class="board" style="--card-w: 140px; --card-h: 240px;"></div>
         {% else %}
           <div class="hint">
             Choose a spread to draw cards. Images are served from <code>cards/standard</code> and positioned by coordinates from <code>spread.MD</code>.
@@ -138,11 +140,79 @@
               {% endif %}
             </div>
           {% endfor %}
+        {% elif stream_url %}
+          <div id="panel-entries"></div>
         {% else %}
           <div class="hint">No draw yet.</div>
         {% endif %}
       </aside>
     </main>
+    {% if stream_url %}
+    <script>
+      (function() {
+        const streamUrl = "{{ stream_url }}";
+        const boardEl = document.getElementById('board');
+        const panelEl = document.getElementById('panel-entries');
+        if (!boardEl || !panelEl) return;
+
+        const es = new EventSource(streamUrl);
+
+        es.addEventListener('init', function(e) {
+          try {
+            const data = JSON.parse(e.data);
+            boardEl.style.width = data.board.width + 'px';
+            boardEl.style.height = data.board.height + 'px';
+            boardEl.style.setProperty('--card-w', data.board.card_width + 'px');
+            boardEl.style.setProperty('--card-h', data.board.card_height + 'px');
+          } catch (err) { /* ignore */ }
+        });
+
+        es.addEventListener('card', function(e) {
+          try {
+            const c = JSON.parse(e.data);
+            const cardEl = document.createElement('div');
+            cardEl.className = 'card';
+            cardEl.style.left = c.left + 'px';
+            cardEl.style.top = c.top + 'px';
+            if (c.orientation === 'reversed') {
+              cardEl.style.transform = 'rotate(180deg)';
+            }
+            cardEl.innerHTML =
+              '<div class="badge">' + c.index + '</div>' +
+              (c.image_url ? ('<img src="' + c.image_url + '" alt="' + c.title + '" />') : ('<div class="fallback">' + c.title + '</div>')) +
+              '<div class="label">' + c.title + '</div>';
+            boardEl.appendChild(cardEl);
+
+            const entry = document.createElement('div');
+            entry.className = 'entry';
+            entry.innerHTML =
+              '<h3>' + c.index + '. ' + c.raw + '</h3>' +
+              '<div class="meta">Position: ' + c.position_label + ' — ' + (c.represents || '') + '</div>' +
+              '<div class="interp">' + (c.interpretation || '<span style="color: var(--muted)">No interpretation generated.</span>') + '</div>';
+            panelEl.appendChild(entry);
+          } catch (err) { /* ignore */ }
+        });
+
+        es.addEventListener('summary', function(e) {
+          try {
+            const s = JSON.parse(e.data);
+            const entry = document.createElement('div');
+            entry.className = 'entry';
+            entry.innerHTML = '<h3>Summary</h3>' + '<div class="interp">' + s.text + '</div>';
+            panelEl.appendChild(entry);
+          } catch (err) { /* ignore */ }
+        });
+
+        es.addEventListener('done', function() {
+          es.close();
+        });
+
+        es.onerror = function() {
+          // Keep connection; browser will retry
+        };
+      })();
+    </script>
+    {% endif %}
   </body>
 </html>
 
